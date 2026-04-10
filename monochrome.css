@@ -1,0 +1,1216 @@
+/* MONOCHROME OVERRIDE FOR TWO-COLOR THEME */
+/* Grayscale all images except work history thumbnails and original colors requested */
+img {
+  filter: none !important;
+}
+.wc-visual-img, .db-card-thumb, .db-hero-visual-img, .db-card-avatar {
+  filter: grayscale(0%) !important;
+}
+
+/* Dashboard Card Avatar - Circular Badge */
+.db-card-avatar-wrap {
+  position: absolute !important;
+  top: 12px !important;
+  left: 12px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  background-color: var(--bg-primary) !important; /* Context-aware background */
+  border: 1px solid rgba(128,128,128,0.2) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+  z-index: 10 !important;
+  padding: 4px !important; /* Small padding for cards */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+.db-card-avatar {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important; /* Contain for consistent branding without cropping */
+}
+
+
+
+*:not(.sf-li-icon):not(.sf-preview-card):not(.marquee-item):not(.img-dark):not(.img-light):not(.db-hero):not(.db-sidebar):not(.view-badge):not(.db-card-avatar):not(.db-nav-btn),
+*::before, *::after {
+  background-image: none; /* Removed !important to allow intentional backgrounds */
+  box-shadow: none !important;
+  text-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+  border-color: transparent !important;
+  border-width: 0 !important;
+}
+
+/* Specific elements that MUST keep their borders if explicitly set later in this file */
+.db-hero, .db-sidebar, .view-badge, .db-nav-btn {
+  border: initial !important; 
+}
+
+.wc-visual-bg, .wc-visual-lines, .intro-canvas, .hero-canvas {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Re-enable display for player areas but keep them sharp */
+/* Cinematic Player UI handled below */
+
+.vl-year {
+  color: var(--text-primary) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="light"] {
+  --bg-primary: #ffffff !important;
+  --text-primary: #000000 !important;
+}
+
+/* Global visibility for text */
+body, h1, h2, h3, h4, h5, h6, .hero-name, #hero-name, .hero-role, .wc-title, .section-title, .stat-label {
+  color: var(--text-primary) !important;
+}
+
+/* ───────── ABSOLUTE MONOCHROME DASHBOARD ───────── */
+.dashboard {
+  flex-direction: column !important;
+  background-color: #f2f2f5 !important; /* Premium light grey background like reference */
+  background-image: none !important;
+  width: 95vw !important;
+  max-width: 1400px !important;
+  height: 90vh !important;
+  overflow: hidden !important;
+  border-radius: 24px !important;
+  display: flex !important;
+  color: #111 !important;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.2) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+[data-theme="dark"] .dashboard {
+  background-color: #0d0d0e !important;
+  color: #f0f0f0 !important;
+  border-color: rgba(255,255,255,0.03) !important;
+}
+
+.db-sidebar { display: block !important; }
+
+.db-main {
+  width: 100% !important;
+  padding: 0 !important;
+  background-color: var(--bg-primary) !important;
+  background-image: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow-y: auto !important;
+}
+
+/* Hero Section - HORIZONTAL (ONE SIDE IMAGE, ONE SIDE TEXT) */
+.db-hero {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  display: flex !important;
+  flex-direction: row !important; /* SIDE BY SIDE */
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: left !important;
+  min-height: clamp(400px, 60vh, 700px) !important;
+  padding: 80px 10% !important;
+  gap: 80px !important;
+}
+
+.db-hero-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important; /* LEFT ALIGN */
+  flex: 1 !important;
+  max-width: 800px !important;
+}
+
+.db-hero-visual-wrap {
+  width: 320px !important; /* LARGE LOGO SCALE */
+  height: 300px !important;
+  background-color: var(--bg-primary) !important; /* Switches with theme */
+  border: 1px solid rgba(128,128,128,0.3) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px !important;
+  margin-bottom: 0 !important;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.1) !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+}
+
+.db-hero-visual-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important; /* Preserve all logo details/text */
+}
+
+.db-hero-visual-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  filter: grayscale(0%) !important;
+}
+.db-hero-content {
+  padding-right: 20px !important;
+}
+
+.db-hero-title, .db-hero-sub, .db-hero-badge {
+  color: var(--text-primary) !important;
+  opacity: 1 !important;
+}
+
+.db-hero-title {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 5rem !important; /* REFINED FOR SIDE-BY-SIDE */
+  font-weight: 900 !important;
+  line-height: 0.95 !important;
+  margin-bottom: 20px !important;
+  letter-spacing: -1px !important;
+}
+.db-hero-sub {
+  font-size: 0.85rem !important; /* SMALLER FOR AGENCY LOOK */
+  max-width: 600px !important;
+  opacity: 0.6 !important;
+  line-height: 1.6 !important;
+}
+
+/* Ensure all cards and images are visible */
+.db-grid, .db-rows, .db-row, .db-card {
+  background-color: var(--bg-primary) !important;
+  background-image: none !important;
+  color: var(--text-primary) !important;
+}
+
+.db-card-title, .db-card-meta, .db-row-title, .db-row-count {
+  color: var(--text-primary) !important;
+  opacity: 1 !important;
+}
+
+/* Project images grayscale bypass */
+.db-card-thumb, .db-hero-visual-img {
+  filter: grayscale(0%) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.db-card:hover .db-card-thumb {
+  transform: scale(1.08) !important;
+}
+
+/* Close Button - Clean circle */
+.db-top-close {
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  width: 44px !important;
+  height: 44px !important;
+  background-color: var(--text-primary) !important;
+  color: var(--bg-primary) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999 !important;
+  cursor: pointer !important;
+}
+
+/* Hero Badge & Roles - Remove BG as requested */
+.hero-badge, .hero-role, .wc-role, .db-role, .db-hero-badge {
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  color: var(--text-primary) !important;
+  font-size: 0.65rem !important; /* MEGA SMALL */
+  text-transform: uppercase !important;
+  letter-spacing: 3px !important;
+  font-weight: 800 !important;
+  margin-bottom: 12px !important;
+}
+
+/* Fix Visibility for dashboard content & work history cards */
+.dashboard, .wc-visual {
+  background-color: var(--bg-primary) !important;
+}
+
+/* ───────── MOBILE DASHBOARD HERO OPTIMIZATION ───────── */
+@media (max-width: 800px) {
+  .db-hero {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 80px 25px 60px !important;
+    gap: 35px !important;
+    min-height: auto !important;
+    justify-content: flex-start !important;
+  }
+
+  .db-hero-visual-wrap {
+    width: 240px !important; /* BIGGER LOGO ON MOBILE */
+    height: 240px !important;
+    margin-bottom: 5px !important;
+    border-width: 2px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
+  }
+
+  .db-hero-content {
+    align-items: center !important;
+    padding-right: 0 !important;
+    text-align: center !important;
+  }
+
+  .db-hero-title {
+    font-size: 3.2rem !important; /* Scaled for mobile width */
+    line-height: 1 !important;
+    margin-bottom: 15px !important;
+  }
+
+  .db-hero-sub {
+    font-size: 0.82rem !important;
+    margin: 0 auto !important;
+  }
+
+  .db-hero-badge {
+    justify-content: center !important;
+    margin-bottom: 10px !important;
+  }
+}
+
+.db-content, .db-grid, .db-hero, .db-main, .db-sidebar-nav, .db-card-body p, .db-card-body h4, 
+.db-hero-title, .db-hero-sub, .db-row-title, .db-card-title, .db-card-meta {
+  color: var(--text-primary) !important;
+}
+
+.view-badge {
+  background-color: var(--text-primary) !important;
+  color: var(--bg-primary) !important;
+  padding: 4px 14px !important;
+  border-radius: 50px !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  cursor: pointer !important;
+  transition: opacity 0.2s !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  border: 1px solid var(--text-primary) !important;
+}
+
+/* ───────── MODERN SIDEBAR MONOCHROME ───────── */
+.side-nav {
+  background-color: var(--bg-primary) !important;
+  border: 2px solid var(--text-primary) !important;
+}
+
+.side-link {
+  color: var(--text-primary) !important;
+  opacity: 0.5 !important;
+}
+
+.side-link:hover, .side-link.active {
+  background-color: var(--text-primary) !important;
+  color: var(--bg-primary) !important;
+  opacity: 1 !important;
+}
+
+.side-nav-toggle, .user-name, .user-greeting, .user-arrow {
+  color: var(--text-primary) !important;
+}
+
+.search-box {
+  background-color: transparent !important;
+  border: 1px solid var(--text-primary) !important;
+}
+
+.search-box input {
+  color: var(--text-primary) !important;
+}
+
+/* ───────── MODERN TOPBAR MONOCHROME ───────── */
+.top-nav {
+  background-color: var(--bg-primary) !important;
+  border-bottom: 2px solid var(--text-primary) !important;
+}
+
+.nav-logo {
+  color: var(--text-primary) !important;
+}
+
+.nav-link {
+  color: var(--text-primary) !important;
+  opacity: 0.5 !important;
+}
+
+.nav-link:hover {
+  opacity: 1 !important;
+}
+
+.nav-action-btn {
+  color: var(--text-primary) !important;
+}
+
+/* Update hero padding */
+#hero {
+  padding-top: 150px !important;
+}
+
+@media (max-width: 1024px) {
+  .nav-logo {
+    cursor: pointer;
+    z-index: 4000;
+  }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-primary) !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    z-index: 3500;
+  }
+  .nav-links.active {
+    display: flex !important;
+  }
+  .nav-link {
+    color: var(--text-primary) !important;
+    font-size: 1.5rem !important;
+    opacity: 1 !important;
+  }
+  .side-nav {
+    border-left: none !important;
+  }
+}
+
+/* ───────── CINEMATIC LIGHTBOX UI ───────── */
+.vl-overlay {
+  background: rgba(0,0,0,0.95) !important;
+  backdrop-filter: blur(25px) !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.vl-player {
+  width: 95% !important;
+  height: auto !important;
+  max-width: 1200px !important;
+  max-height: 90vh !important;
+  background-color: #000 !important;
+  display: flex !important;
+  flex-direction: row !important; /* SIDE BY SIDE */
+  position: relative !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  animation: vlPopIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@media (max-width: 1024px) {
+  .vl-player { flex-direction: column !important; }
+}
+
+/* PORTRAIT MODE REELS */
+.vl-overlay.portrait-mode .vl-player {
+  max-width: 1000px !important;
+}
+.vl-overlay.portrait-mode .vl-media-side {
+  aspect-ratio: 9/16 !important;
+  flex: 1.2 !important;
+}
+
+@keyframes vlPopIn {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Header removed in new layout */
+
+.vl-close {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  background-color: rgba(255,255,255,0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  color: #fff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.3s !important;
+  font-size: 1.2rem !important;
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  z-index: 1000 !important;
+}
+
+.vl-close:hover {
+  background-color: #e74c3c !important;
+  transform: rotate(90deg) !important;
+}
+
+.vl-avatar-wrap {
+  width: 72px !important; /* Increased for big detail */
+  height: 72px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  padding: 6px !important;
+  background-color: var(--bg-primary) !important; /* Switches with theme */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+}
+
+.vl-avatar { 
+  width: 100% !important; 
+  height: 100% !important; 
+  object-fit: contain !important; /* Changed from cover to contain to show full logo */
+  opacity: 1 !important;
+}
+
+.vl-media-side {
+  flex: 1.5 !important;
+  aspect-ratio: 16/9 !important;
+  background-color: #000 !important;
+  position: relative !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.vl-media-side iframe, .vl-media-side img, .vl-media-side video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  border: none !important;
+  display: block !important;
+}
+
+.vl-text-side {
+  flex: 1 !important;
+  padding: 85px 35px 40px !important; /* Proper clearance for close button */
+  color: #fff !important;
+  text-align: left !important;
+  background: #0a0a0d !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  border-left: 1px solid rgba(255,255,255,0.1) !important;
+  overflow-y: auto !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.vl-text-side::-webkit-scrollbar {
+  display: none !important;
+}
+
+.vl-title {
+  color: #fff !important;
+  font-size: 1.85rem !important; /* Scaled down */
+  margin-bottom: 15px !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  line-height: 1.2 !important;
+}
+
+.vl-description {
+  color: rgba(255,255,255,0.6) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+}
+
+
+
+.vl-main-title {
+  font-size: 2rem !important; /* Reduced for better balance */
+  font-weight: 800 !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  margin-bottom: 12px !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0px !important;
+  color: #ffffff !important; /* Force visibility */
+}
+
+.vl-pill-group {
+  display: flex !important;
+  gap: 8px !important;
+  margin-bottom: 20px !important;
+}
+
+.vl-pill {
+  padding: 4px 14px !important;
+  border-radius: 30px !important;
+  background-color: rgba(255,255,255,0.1) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  color: #ffffff !important;
+  font-size: 0.65rem !important; /* SMALLER TEXT SIZE */
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  transition: background 0.3s !important;
+}
+
+.vl-pill:hover { background-color: rgba(255,255,255,0.2) !important; }
+
+
+
+.vl-description {
+  font-size: 0.8rem !important; /* SMALLER, CLEANER TEXT */
+  line-height: 1.7 !important;
+  opacity: 0.6 !important;
+  max-width: 800px !important;
+  margin-bottom: 40px !important;
+  color: #ffffff !important;
+  font-weight: 400 !important;
+}
+
+/* Portrait Mode adjustments for Reels */
+.vl-overlay.portrait-mode .vl-container { max-width: 450px !important; }
+.vl-overlay.portrait-mode .vl-media-wrapper { aspect-ratio: 9/16 !important; }
+
+@media (max-width: 768px) {
+  .vl-container { max-height: 100vh !important; max-width: 100vw !important; border-radius: 0 !important; }
+  .vl-header { padding: 20px !important; }
+  .vl-main-title { font-size: 1.8rem !important; }
+  .vl-content-details { padding: 25px 20px !important; }
+  .vl-back-btn { width: 44px !important; height: 44px !important; }
+  .vl-avatar-wrap { 
+    width: 60px !important; /* Bigger mobile avatar */
+    height: 60px !important; 
+    padding: 3px !important; 
+  }
+}
+
+.db-top-close i {
+  font-size: 1.5rem !important;
+  color: var(--bg-primary) !important; /* Force icon color to match background inversion */
+}
+
+/* ───────── HORIZONTAL DASHBOARD NAVIGATION ───────── */
+
+
+/* ───────── PREMIUM FIXED TOPBAR (AGENCY STYLE) ───────── */
+
+
+.db-sidebar {
+  display: none !important; /* Removed topbar completely */
+}
+
+.db-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  height: 100% !important;
+  gap: 40px !important;
+}
+
+.db-nav-btn {
+  background: none !important;
+  border: none !important;
+  color: #ffffff !important; /* Force white text on black bar */
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  font-size: 0.75rem !important;
+  opacity: 0.6 !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  position: relative !important;
+  height: 100% !important;
+}
+
+.db-nav-btn i {
+  margin-right: 12px !important;
+  font-size: 0.9rem !important;
+  color: #ffffff !important;
+}
+
+.db-nav-btn::after {
+  content: none !important;
+}
+
+.db-nav-btn.active {
+  opacity: 1 !important;
+  color: #ffffff !important;
+}
+
+.db-nav-btn.active::after {
+  display: none !important;
+}
+
+.db-nav-btn:hover {
+  opacity: 1 !important;
+}
+
+/* Close Button Top-Right Fixed Position */
+.db-top-close {
+  position: absolute !important;
+  right: 20px !important;
+  top: 20px !important;
+  width: 44px !important;
+  height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #ffffff !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+  color: #000000 !important;
+  z-index: 9999 !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+}
+
+.db-top-close i {
+  font-size: 1.1rem !important;
+  line-height: 1 !important;
+  color: #000000 !important;
+}
+
+.db-top-close:hover {
+  background: #f0f0f0 !important;
+  transform: scale(1.1) rotate(90deg) !important;
+}
+
+/* ───────── SKILLS MARQUEE ───────── */
+.skills-marquee-section {
+  padding: 40px 0 !important;
+  overflow: hidden;
+  background: var(--bg-primary) !important;
+}
+
+.marquee-wrapper {
+  display: flex;
+  align-items: center; /* Center vertically */
+  overflow: hidden;
+  user-select: none;
+  gap: 30px;
+  height: 120px; /* Explicit height to allow centering */
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center; /* Center horizontally in track if needed */
+  flex-shrink: 0;
+  gap: 30px;
+  min-width: 100%;
+  animation: scroll-marquee 60s linear infinite;
+}
+
+@keyframes scroll-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-item {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px !important; /* SQUARE BOX DESIGN (SQUIRCLE) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #fff !important;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+  overflow: hidden; /* Ensure content stays inside circle */
+}
+/* Marquee items now use their own colors */
+.marquee-item {
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+[data-theme="light"] .marquee-item {
+  border: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+.marquee-item span {
+  color: #fff !important;
+}
+
+.marquee-item:hover {
+  transform: translateY(-10px) scale(1.1);
+}
+
+/* Cards & Glass elements */
+.glass-card, .db-sidebar, .db-main, .sf-list-item, .contact-card {
+  background-color: var(--bg-primary) !important;
+  border: none !important;
+  color: var(--text-primary) !important;
+}
+
+/* Primary buttons & icons */
+.btn-primary, .intro-logo-circle, .contact-icon {
+  background-color: var(--text-primary) !important;
+  color: var(--bg-primary) !important;
+  border: none !important;
+}
+
+.wc-btn {
+  background: none !important;
+  color: var(--text-primary) !important;
+  border: none !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 1.5px !important;
+  padding: 10px 0 !important;
+  text-decoration: none !important;
+}
+
+.wc-btn:hover {
+  opacity: 0.6 !important;
+  transform: none !important;
+  background: none !important;
+  color: var(--text-primary) !important;
+}
+
+/* Skills Folder Inversion for visibility */
+.sf-folder-front, .sf-folder-tab {
+  background-color: var(--text-primary) !important;
+  color: var(--bg-primary) !important;
+  border: none !important;
+}
+
+/* Force all text/icons inside the inverted folder to follow the background color */
+.sf-folder-front .sf-folder-name, 
+.sf-folder-front .sf-folder-hint,
+.sf-folder-front .sf-folder-hint i,
+.sf-folder-front .sf-folder-hint span,
+.sf-folder-front * {
+  color: var(--bg-primary) !important;
+}
+
+.sf-folder-back h3, .sf-folder-back span, .sf-folder-back .sf-stat-item b {
+  color: var(--text-primary) !important;
+}
+
+.sf-folder-tab {
+  left: 20px !important; /* Proper tab alignment */
+  width: 90px !important;
+}
+
+/* Hide entire folder structure on click (when open) as requested */
+.sf-scene.open .sf-folder {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  display: none !important;
+}
+
+.sf-close-btn {
+  display: none;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 25px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 2rem;
+  z-index: 20;
+}
+
+.sf-scene.open .sf-close-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-primary i, .wc-btn i, .contact-icon i {
+  color: var(--bg-primary) !important;
+}
+
+/* Outline buttons & badges */
+.btn-outline, .sf-li-badge, .intro-skip, .db-card-type, .badge-video, .badge-reel, .badge-image, .wc-badge {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border: none !important;
+}
+
+/* Interactive hover states */
+.btn-primary:hover, .wc-btn:hover, .sf-folder:hover .sf-folder-front, .contact-link:hover .contact-icon {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+.btn-primary:hover i, .wc-btn:hover i, .contact-link:hover .contact-icon i, .sf-folder:hover .sf-folder-front i {
+  color: var(--text-primary) !important;
+}
+
+.btn-outline:hover {
+  background-color: var(--text-primary) !important;
+  color: var(--bg-primary) !important;
+}
+
+/* Small UI elements */
+.orb {
+  background-color: var(--text-primary) !important;
+  opacity: 0.1 !important;
+}
+
+.intro-progress-fill, .timeline-dot, .scroll-indicator span, .sf-folder-tab {
+  background-color: var(--text-primary) !important;
+}
+
+.intro-ring-1 {
+  border-top-color: var(--text-primary) !important;
+  border-style: solid !important;
+}
+.intro-ring-2 {
+  border-bottom-color: var(--text-primary) !important;
+  border-style: solid !important;
+}
+.intro-ring-3 {
+  border-top-color: var(--text-primary) !important;
+  border-right-color: var(--text-primary) !important;
+  border-style: solid !important;
+}
+/* Reels & Card Thumbnails - Professional Fit */
+.db-card-thumb {
+  width: 100% !important;
+  background-color: var(--bg-primary) !important;
+  object-fit: cover !important;
+  filter: grayscale(0%) !important;
+}
+
+
+
+/* Video Lightbox Portrait/Reel Mode */
+.vl-overlay.portrait-mode .vl-player {
+  max-width: 1100px !important; /* Widened to allow side-by-side video and text clearly */
+  width: 95% !important;
+}
+/* Ensure text side in portrait mode is non-scrolling and fully visible */
+.vl-overlay.portrait-mode .vl-text-side {
+  overflow-y: hidden !important; 
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 4rem 3.5rem !important;
+}
+.vl-overlay.portrait-mode .vl-frame-wrap {
+  aspect-ratio: 9/16 !important;
+}
+
+/* Ensure all images and marquee stay visible */
+.wc-visual-img, .db-card-thumb, .db-hero-visual-img, .img-dark, .img-light, .marquee-item { 
+  filter: grayscale(0%) !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="light"] .img-dark { 
+  display: none !important; 
+}
+html:not([data-theme="light"]) .img-light { 
+  display: none !important; 
+}
+
+/* ───────── DASHBOARD COMPONENTS ───────── */
+.view-badge {
+  background: none !important;
+  color: var(--text-primary) !important;
+  padding: 0 !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 1.5px !important;
+  cursor: pointer !important;
+  transition: opacity 0.2s !important;
+  border: none !important;
+}
+
+.view-badge:hover {
+  opacity: 0.6 !important;
+  text-decoration: underline !important;
+}
+
+/* ───────── GRID/GALLERY MODE ───────── */
+.db-category-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 20px 0 !important;
+  border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+  margin-bottom: 20px !important;
+}
+
+.db-grid-content {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 30px !important;
+  padding: 20px 0 !important;
+}
+
+.db-grid-content .db-card {
+  flex: none !important; /* Disable row fixed width */
+  width: 100% !important;
+}
+
+/* ───────── MOBILE RESPONSIVENESS ───────── */
+@media (max-width: 991px) {
+  .db-hero {
+    flex-direction: column !important;
+    text-align: center !important;
+    justify-content: center !important;
+    min-height: 320px !important;
+    padding: 60px 40px !important;
+    gap: 30px !important;
+  }
+  
+  .db-hero-content {
+    padding-right: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .db-hero-visual-wrap {
+    display: none !important; /* Remove logo on mobile view as requested */
+  }
+
+
+  .db-hero-title {
+    font-size: 4rem !important; /* Larger on mobile too */
+    line-height: 1.0 !important;
+  }
+
+  .db-hero-sub {
+    font-size: 1rem !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ───────── MOBILE SKILLS OPTIMIZATION ───────── */
+@media (max-width: 768px) {
+  .sf-scene.open .sf-list {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    padding: 10px 20px 30px !important;
+    gap: 12px !important;
+    mask-image: linear-gradient(to right, black 85%, transparent) !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    margin-bottom: 1rem !important;
+  }
+  .sf-scene.open .sf-list::-webkit-scrollbar {
+    display: none !important;
+  }
+  .sf-list-item {
+    flex: 0 0 150px !important;
+    width: 150px !important;
+    min-width: 150px !important;
+    padding: 1.25rem 0.5rem !important;
+  }
+  .sf-li-icon {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .sf-li-name {
+    font-size: 0.95rem !important;
+  }
+  .sf-li-cat {
+    font-size: 0.7rem !important;
+  }
+  
+  /* Indicators for mobile scrolling */
+  .sf-dots {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    margin-top: -15px !important;
+    margin-bottom: 2rem !important;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .sf-scene.open .sf-dots {
+    opacity: 1;
+  }
+  .sf-dot {
+    width: 6px !important;
+    height: 6px !important;
+    border-radius: 50% !important;
+    background-color: var(--text-primary) !important;
+    opacity: 0.2 !important;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1) !important;
+    cursor: pointer !important;
+    pointer-events: all !important;
+  }
+  .sf-dot.active {
+    opacity: 1 !important;
+    transform: scale(1.4) !important;
+  }
+}
+
+/* ───────── RANKING LIST UI (REFERENCE MATCH) ───────── */
+.ranking-card {
+  flex: 0 0 215px !important;
+  background: #fdfdfd !important;
+  border-radius: 20px !important;
+  color: #111 !important;
+  padding: 30px 25px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important; /* Slightly tighter gap for better vertical fit */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+  border: 1px solid rgba(0,0,0,0.03) !important;
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  position: relative !important;
+  height: auto !important; /* Allow growing to show all text */
+  min-height: 380px !important; /* Ensure consistent vertical presence */
+}
+
+
+
+[data-theme="dark"] .ranking-card {
+  background: #141416 !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,0.05) !important;
+}
+
+.ranking-card:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+  background: #ffffff !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+
+[data-theme="dark"] .ranking-card:hover {
+  background: #1e1e21 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+.card-header {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.card-rank {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  line-height: 0.9 !important;
+  color: #ffffff !important; /* Striking white */
+  opacity: 1 !important;
+}
+
+[data-theme="light"] .card-rank {
+  color: #111111 !important;
+  transition: color 0.3s ease !important;
+}
+
+.ranking-card:hover .card-rank,
+.ranking-card:active .card-rank {
+  color: #e74c3c !important; /* Interactive red feedback */
+}
+
+.card-brand-accent {
+  width: 25px !important;
+  height: 3px !important;
+  background: #e74c3c !important;
+  border-radius: 2px !important;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.ranking-card:hover .card-brand-accent {
+  width: 60px !important; /* Professional expansion on hover */
+}
+
+.ranking-card .db-card-info {
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+.ranking-card .db-card-title {
+  color: #111111 !important; /* Force visibility in light mode */
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.5px !important;
+  margin-bottom: 2px !important;
+  white-space: normal !important;
+  transition: color 0.3s ease !important;
+}
+
+[data-theme="dark"] .ranking-card .db-card-title {
+  color: #ffffff !important;
+}
+
+.ranking-card:hover .db-card-title,
+.ranking-card:active .db-card-title {
+  color: #e74c3c !important; /* Title turns red on click/hover */
+}
+
+.ranking-card .db-card-meta {
+  color: #555555 !important;
+  opacity: 1 !important; /* Ensure visibility */
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+}
+
+[data-theme="dark"] .ranking-card .db-card-meta {
+  color: #aaaaaa !important;
+}
+
+.ranking-card:hover .db-card-meta,
+.ranking-card:active .db-card-meta {
+  color: #e74c3c !important; /* Description turns red on click/hover */
+  opacity: 1 !important;
+}
+
+
+
+.db-card-media-wrap {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 1/1 !important; /* Square thumb as in reference */
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  margin: 5px 0 !important;
+}
+
+.ranking-card .db-card-thumb {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 12px !important;
+  transition: transform 0.6s ease !important;
+}
+
+.ranking-card:hover .db-card-thumb {
+  transform: scale(1.1) !important;
+}
+
+
+
+
+
+/* Grid Layout Fix for Ranking Cards */
+.db-grid-content {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)) !important;
+}
