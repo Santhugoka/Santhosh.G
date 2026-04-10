@@ -388,8 +388,25 @@ body, h1, h2, h3, h4, h5, h6, .hero-name, #hero-name, .hero-role, .wc-title, .se
   }
   .nav-link {
     color: var(--text-primary) !important;
-    font-size: 1.5rem !important;
+    font-size: 1.25rem !important; /* Scaled down for perfect fitting */
+    opacity: 0.7 !important;
+    text-transform: uppercase !important;
+    font-weight: 850 !important;
+    letter-spacing: 2px !important; /* Reduced to avoid overflow on long titles */
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    text-align: center !important; /* Force center for multi-line labels */
+    width: 90% !important;
+    max-width: 380px !important;
+    display: block !important;
+  }
+  
+  .nav-link:hover, .nav-link:active {
+    color: #e74c3c !important;
     opacity: 1 !important;
+    transform: scale(1.05) !important; /* Smaller scale boost to prevent overlap */
+    letter-spacing: 3px !important;
   }
   .side-nav {
     border-left: none !important;
@@ -421,7 +438,15 @@ body, h1, h2, h3, h4, h5, h6, .hero-name, #hero-name, .hero-role, .wc-title, .se
 }
 
 @media (max-width: 1024px) {
-  .vl-player { flex-direction: column !important; }
+  .vl-player { 
+    flex-direction: column !important; 
+    max-height: 95vh !important;
+  }
+  .vl-text-side {
+    padding: 3rem 1.5rem 2.5rem !important;
+    border-left: none !important;
+    border-top: 1px solid rgba(255,255,255,0.1) !important;
+  }
 }
 
 /* PORTRAIT MODE REELS */
@@ -587,15 +612,61 @@ body, h1, h2, h3, h4, h5, h6, .hero-name, #hero-name, .hero-role, .wc-title, .se
 .vl-overlay.portrait-mode .vl-media-wrapper { aspect-ratio: 9/16 !important; }
 
 @media (max-width: 768px) {
-  .vl-container { max-height: 100vh !important; max-width: 100vw !important; border-radius: 0 !important; }
-  .vl-header { padding: 20px !important; }
-  .vl-main-title { font-size: 1.8rem !important; }
-  .vl-content-details { padding: 25px 20px !important; }
-  .vl-back-btn { width: 44px !important; height: 44px !important; }
-  .vl-avatar-wrap { 
-    width: 60px !important; /* Bigger mobile avatar */
-    height: 60px !important; 
-    padding: 3px !important; 
+  .vl-player { 
+    max-height: 98vh !important; 
+    max-width: 100vw !important; 
+    border-radius: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  
+  .vl-text-side {
+    padding: 2rem 1.25rem !important;
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: auto !important;
+  }
+
+  .vl-title {
+    font-size: 1.5rem !important; /* Smaller text */
+    margin-bottom: 12px !important;
+  }
+
+  .vl-description {
+    font-size: 0.8rem !important; /* Smaller text */
+    line-height: 1.5 !important;
+    margin-bottom: 25px !important;
+    opacity: 0.7 !important;
+  }
+
+  .vl-pill-group {
+    justify-content: center !important;
+  }
+
+  .vl-media-side {
+    aspect-ratio: 16/9 !important;
+    flex: none !important;
+    width: 100% !important;
+  }
+
+  /* Portrait mode on mobile (Reels) */
+  .vl-overlay.portrait-mode .vl-media-side {
+    aspect-ratio: 9/16 !important;
+    max-height: 60vh !important; /* Don't let it take all height */
+    width: auto !important;
+    margin: 0 auto !important;
+  }
+
+  .vl-close { 
+    top: 15px !important; 
+    right: 15px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .db-hero-title {
+    font-size: 2.8rem !important; /* Slightly smaller for mobile */
   }
 }
 
@@ -1187,18 +1258,31 @@ html:not([data-theme="light"]) .img-light {
 .db-card-media-wrap {
   position: relative !important;
   width: 100% !important;
-  aspect-ratio: 1/1 !important; /* Square thumb as in reference */
+  aspect-ratio: 16/9 !important; /* Proper cinematic fit for videos/std */
   border-radius: 12px !important;
   overflow: hidden !important;
-  margin: 5px 0 !important;
+  margin: 15px 0 !important;
+  background: #000 !important; /* Solid backdrop for containment */
+}
+
+/* Portrait optimization for Reels - specifically tall but fitting card */
+.ranking-card.reel-card .db-card-media-wrap {
+  aspect-ratio: 4/5 !important; 
 }
 
 .ranking-card .db-card-thumb {
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important;
+  object-fit: cover !important; /* Default to high-impact cover */
   border-radius: 12px !important;
-  transition: transform 0.6s ease !important;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* For videos that look blurry or clipped if covered. 
+   Optionally could use contain but usually cover looks more professional. 
+*/
+.ranking-card.reel-card .db-card-thumb {
+  object-fit: cover !important;
 }
 
 .ranking-card:hover .db-card-thumb {
@@ -1226,53 +1310,132 @@ html:not([data-theme="light"]) .img-light {
   }
 }
 
-/* 2. MOBILE: CINEMA LIST DESIGN (Up to 991px) */
+/* 2. MOBILE: PROFESSIONAL RANKING LIST (Up to 991px) */
 @media (max-width: 991px) {
-  .db-grid-content {
+  .db-grid-content, .db-row-scroll {
     display: flex !important;
     flex-direction: column !important;
-    gap: 16px !important;
-    padding: 16px !important;
+    gap: 12px !important;
+    padding: 10px 0 !important;
+    overflow-x: visible !important;
   }
 
-  .ranking-card {
-    flex-direction: row !important; /* Horizontal professional list */
+  /* Professional Row Header Adjustments */
+  .db-row-header {
+    display: flex !important;
     align-items: center !important;
-    padding: 15px !important;
-    gap: 18px !important;
-    min-height: auto !important;
-    border-radius: 16px !important;
+    justify-content: space-between !important;
+    padding: 0 5px 10px !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05) !important;
+    margin-bottom: 10px !important;
+  }
+  [data-theme="dark"] .db-row-header {
+    border-color: rgba(255,255,255,0.05) !important;
+  }
+
+  .db-row-title {
+    font-size: 0.8rem !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    font-weight: 800 !important;
+    opacity: 0.8 !important;
+  }
+
+  .view-badge {
+    font-size: 0.65rem !important;
+    padding: 3px 10px !important;
+    opacity: 0.9 !important;
+  }
+
+  /* Professional List Card (Ranking List) */
+  .ranking-card {
+    flex: none !important;
+    width: 100% !important;
+    flex-direction: row !important; 
+    align-items: center !important;
+    padding: 20px 22px !important; /* Increased padding for more "Professional" breathing room */
+    gap: 24px !important;
+    min-height: 100px !important; /* Force a bit of height as in reference */
+    border-radius: 18px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0,0,0,0.03) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+    margin-bottom: 2px !important;
+  }
+
+  [data-theme="dark"] .ranking-card {
+    background: #141416 !important;
+    border-color: rgba(255,255,255,0.02) !important;
   }
 
   .card-header {
-    width: 45px !important; /* Compact rank for mobile list */
+    width: 45px !important; 
     flex-shrink: 0 !important;
+    gap: 0 !important;
   }
   
   .card-rank {
-    font-size: 1.8rem !important; /* Scaled down for list */
+    font-size: 1.8rem !important; 
+    line-height: 1 !important;
+    color: #111 !important;
+    font-weight: 800 !important;
+    letter-spacing: -1px !important;
   }
+  [data-theme="dark"] .card-rank { color: #fff !important; }
 
   .db-card-info {
     flex: 1 !important;
-    margin: 0 !important;
+    text-align: center !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding: 0 10px !important;
   }
 
   .db-card-title {
-    font-size: 1rem !important;
+    font-size: 0.82rem !important; /* Smaller text font as requested */
+    line-height: 1.25 !important;
     margin-bottom: 0 !important;
+    font-weight: 800 !important;
+    color: #000 !important;
+    letter-spacing: 0px !important;
+  }
+  [data-theme="dark"] .db-card-title { color: #fff !important; }
+
+  .db-card-meta {
+    display: none !important; /* Removed year as requested */
   }
 
   .db-card-media-wrap {
-    width: 65px !important; /* Thumbnail on right side */
-    height: 65px !important;
+    width: 58px !important; 
+    height: 58px !important;
     margin: 0 !important;
-    border-radius: 8px !important;
-    order: 3 !important; /* Place image at the end of the row */
+    border-radius: 12px !important;
+    order: 3 !important; 
+    flex-shrink: 0 !important;
+    position: relative !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
+  }
+  
+  /* Make video type clearly visible (Always show play btn on mobile list) */
+  .ranking-card .db-play-btn {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) scale(0.65) !important;
+    background: rgba(255,255,255,0.92) !important;
+    color: #000 !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.8rem !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
   }
   
   .card-brand-accent {
-    display: none !important; /* Keep mobile list ultra-clean */
+    display: none !important;
+  }
+  
+  .db-card-thumb {
+    border-radius: 12px !important;
+    object-fit: cover !important;
   }
 }
 
