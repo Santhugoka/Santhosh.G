@@ -1209,8 +1209,70 @@ html:not([data-theme="light"]) .img-light {
 
 
 
-/* Grid Layout Fix for Ranking Cards */
-.db-grid-content {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)) !important;
+/* ───────── RESPONSIVE PROFESSIONAL UI DESIGNS ───────── */
+
+/* 1. PC: STUDIO GRID DESIGN (992px+) */
+@media (min-width: 992px) {
+  .db-grid-content {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+    gap: 40px !important;
+    padding: 40px !important;
+  }
+  
+  .ranking-card {
+    min-height: 480px !important;
+    padding: 40px 35px !important;
+  }
 }
+
+/* 2. MOBILE: CINEMA LIST DESIGN (Up to 991px) */
+@media (max-width: 991px) {
+  .db-grid-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 16px !important;
+  }
+
+  .ranking-card {
+    flex-direction: row !important; /* Horizontal professional list */
+    align-items: center !important;
+    padding: 15px !important;
+    gap: 18px !important;
+    min-height: auto !important;
+    border-radius: 16px !important;
+  }
+
+  .card-header {
+    width: 45px !important; /* Compact rank for mobile list */
+    flex-shrink: 0 !important;
+  }
+  
+  .card-rank {
+    font-size: 1.8rem !important; /* Scaled down for list */
+  }
+
+  .db-card-info {
+    flex: 1 !important;
+    margin: 0 !important;
+  }
+
+  .db-card-title {
+    font-size: 1rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .db-card-media-wrap {
+    width: 65px !important; /* Thumbnail on right side */
+    height: 65px !important;
+    margin: 0 !important;
+    border-radius: 8px !important;
+    order: 3 !important; /* Place image at the end of the row */
+  }
+  
+  .card-brand-accent {
+    display: none !important; /* Keep mobile list ultra-clean */
+  }
+}
+
