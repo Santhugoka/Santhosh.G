@@ -474,7 +474,7 @@ function openProjectModal(companyKey) {
     heroEl.style.backgroundImage = 'none';
   } else {
     visualWrap.innerHTML = '';
-    const firstVid = data.Videos[0];
+    const firstVid = data.Videos ? data.Videos[0] : null;
     const heroThumb = firstVid?.embed ? getYouTubeThumbnail(firstVid.embed) : null;
     heroEl.style.backgroundImage = heroThumb ? `url(${heroThumb})` : 'none';
   }
@@ -493,7 +493,7 @@ function openProjectModal(companyKey) {
     document.body.style.overflow = 'hidden';
     document.body.classList.add('modal-open');
     
-    // BACKPORT BUGFIX: Reset scroll of main panel to top
+    // Reset scroll to top
     const dbMain = document.getElementById('db-main');
     if (dbMain) dbMain.scrollTop = 0;
   }
@@ -509,20 +509,14 @@ function closeProjectModal() {
 function dbSwitchTab(tab, btn) {
   currentTab = tab;
   document.querySelectorAll('.db-nav-btn').forEach(b => b.classList.remove('active'));
-  // If btn is not the nav-btn itself (e.g., clicked from 'View All' badge), find the correct nav-btn
   const targetBtn = btn || document.querySelector(`.db-nav-btn[data-tab="${tab.toLowerCase()}"]`);
   if (targetBtn) targetBtn.classList.add('active');
   
   renderDashboard(currentCompany, tab);
-  // scroll main panel to top of rows
   const dbMain = document.getElementById('db-main');
   if (dbMain) dbMain.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
-// ─────────────────────────────────────────────
-// 8.  RENDER DASHBOARD ROWS
-// ─────────────────────────────────────────────
 function renderDashboard(companyKey, tab) {
   const data = projectData[companyKey];
   const rows = document.getElementById('db-rows');
@@ -531,41 +525,39 @@ function renderDashboard(companyKey, tab) {
   // Toggle grid class based on tab
   if (tab === 'all') {
     rows.classList.remove('db-grid-mode');
-    if (data.Videos && data.Videos.length > 0) sections.push(buildRow('Videos', data.Videos, 'Videos', 'video', companyKey));
-    if (data.Reels && data.Reels.length > 0) sections.push(buildRow('Reels', data.Reels, 'Reels', 'film', companyKey, true));
-    if (data.Images && data.Images.length > 0) sections.push(buildRow('Images', data.Images, 'Images', 'image', companyKey, false, true));
+    if (data.Videos && data.Videos.length > 0) sections.push(buildRow('Video Folder', data.Videos, 'Videos', 'folder-open', companyKey));
+    if (data.Reels && data.Reels.length > 0) sections.push(buildRow('Reel Folder', data.Reels, 'Reels', 'folder-open', companyKey, true));
+    if (data.Images && data.Images.length > 0) sections.push(buildRow('Image Folder', data.Images, 'Images', 'folder-open', companyKey, false, true));
     rows.innerHTML = sections.join('');
   } else {
-    // CATEGORY VIEW: Single category selection (Videos, Reels, or Images)
+    // CATEGORY VIEW
     rows.classList.remove('db-grid-mode'); 
     let items = [];
     let title = '';
     let isReel = false, isImage = false;
 
-    if (tab === 'Videos') { items = data.Videos; title = 'Videos'; }
-    else if (tab === 'Reels') { items = data.Reels; title = 'Reels'; isReel = true; }
-    else if (tab === 'Images') { items = data.Images; title = 'Images'; isImage = true; }
+    if (tab === 'Videos') { items = data.Videos; title = 'Video Folder'; }
+    else if (tab === 'Reels') { items = data.Reels; title = 'Reel Folder'; isReel = true; }
+    else if (tab === 'Images') { items = data.Images; title = 'Image Folder'; isImage = true; }
 
     if (items && items.length > 0) {
       const cards = items.map((item, idx) => buildCard(item, tab.toLowerCase(), companyKey, isReel, isImage, idx)).join('');
       rows.innerHTML = `
         <div class="db-category-wrapper">
           <div class="db-category-header">
-            <span class="db-row-title">${title}</span>
-            <span class="view-badge" onclick="dbSwitchTab('all', null)">Back to Dashboard</span>
+            <span class="db-row-title"><i class="fa-solid fa-folder-open"></i> ${title}</span>
+            <span class="view-badge" onclick="dbSwitchTab('all', null)">Back to Overview</span>
           </div>
           <div class="db-grid-content">${cards}</div>
         </div>
       `;
     } else {
       rows.innerHTML = `<div class="db-empty">
-        <div class="db-category-header"><span class="db-row-title">${tab}</span></div>
-        <p>No ${tab.toLowerCase()} found for this project yet.</p>
+        <div class="db-category-header"><span class="db-row-title"><i class="fa-solid fa-folder-open"></i> ${tab}</span></div>
+        <p>No files found in this folder yet.</p>
       </div>`;
     }
   }
-
-  // RE-APPLY SEARCH FILTER REMOVED
 }
 
 function buildRow(label, items, typeKey, icon, companyKey, isReel = false, isImage = false) {
@@ -643,14 +635,15 @@ function buildCard(item, typeKey, companyKey, isReel, isImage, index = 0) {
 
   return `
     <div class="db-card ranking-card ${typeClass}" ${clickAttr}>
-      <div class="card-header">
-        <span class="card-rank">${rankNum}</span>
-        <div class="card-brand-accent"></div>
-      </div>
-      
-      <div class="db-card-info">
-        <div class="db-card-title">${item.title || 'Untitled Work'}</div>
-        <div class="db-card-meta">${item.year || (item.src ? 'Image asset' : 'Project Detail')}</div>
+      <div class="db-card-top">
+        <div class="card-header">
+          <span class="card-rank">${rankNum}</span>
+          <div class="card-brand-accent"></div>
+        </div>
+        
+        <div class="db-card-info">
+          <div class="db-card-title">${item.title || 'Untitled Work'}</div>
+        </div>
       </div>
 
       <div class="db-card-media-wrap">

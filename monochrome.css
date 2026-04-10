@@ -1023,16 +1023,16 @@ html:not([data-theme="light"]) .img-light {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  padding: 20px 0 !important;
+  padding: 12px 0 !important;
   border-bottom: 1px solid rgba(0,0,0,0.1) !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 15px !important;
 }
 
 .db-grid-content {
   display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
-  gap: 30px !important;
-  padding: 20px 0 !important;
+  gap: 20px !important;
+  padding: 10px 0 !important;
 }
 
 .db-grid-content .db-card {
@@ -1046,9 +1046,9 @@ html:not([data-theme="light"]) .img-light {
     flex-direction: column !important;
     text-align: center !important;
     justify-content: center !important;
-    min-height: 320px !important;
-    padding: 60px 40px !important;
-    gap: 30px !important;
+    min-height: 180px !important;
+    padding: 30px 20px !important;
+    gap: 15px !important;
   }
   
   .db-hero-content {
@@ -1064,7 +1064,7 @@ html:not([data-theme="light"]) .img-light {
 
 
   .db-hero-title {
-    font-size: 4rem !important; /* Larger on mobile too */
+    font-size: 2.5rem !important; /* Slightly smaller for mobile */
     line-height: 1.0 !important;
   }
 
@@ -1142,16 +1142,31 @@ html:not([data-theme="light"]) .img-light {
   background: #fdfdfd !important;
   border-radius: 20px !important;
   color: #111 !important;
-  padding: 30px 25px !important;
+  padding: 20px 20px !important; /* Tight padding */
   display: flex !important;
   flex-direction: column !important;
-  gap: 12px !important; /* Slightly tighter gap for better vertical fit */
+  gap: 12px !important;
   box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
   border: 1px solid rgba(0,0,0,0.03) !important;
   transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
   position: relative !important;
-  height: auto !important; /* Allow growing to show all text */
-  min-height: 380px !important; /* Ensure consistent vertical presence */
+  height: auto !important; /* No min-height to avoid empty bottom space */
+}
+
+.db-card-top {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+@media (min-width: 992px) {
+  .db-card-top {
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+  }
 }
 
 
@@ -1182,10 +1197,10 @@ html:not([data-theme="light"]) .img-light {
 
 .card-rank {
   font-family: 'Rajdhani', sans-serif !important;
-  font-size: 3rem !important;
+  font-size: 2.2rem !important; /* Smaller rank number */
   font-weight: 800 !important;
   line-height: 0.9 !important;
-  color: #ffffff !important; /* Striking white */
+  color: #ffffff !important;
   opacity: 1 !important;
 }
 
@@ -1217,10 +1232,11 @@ html:not([data-theme="light"]) .img-light {
 }
 
 .ranking-card .db-card-title {
-  color: #111111 !important; /* Force visibility in light mode */
-  font-size: 1.1rem !important;
+  color: #111111 !important;
+  font-size: 0.9rem !important; /* Smaller title font */
   font-weight: 800 !important;
-  letter-spacing: -0.5px !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0px !important;
   margin-bottom: 2px !important;
   white-space: normal !important;
   transition: color 0.3s ease !important;
@@ -1237,8 +1253,8 @@ html:not([data-theme="light"]) .img-light {
 
 .ranking-card .db-card-meta {
   color: #555555 !important;
-  opacity: 1 !important; /* Ensure visibility */
-  font-size: 0.8rem !important;
+  opacity: 0.6 !important;
+  font-size: 0.7rem !important; /* Smaller meta font */
   font-weight: 600 !important;
   transition: all 0.3s ease !important;
 }
@@ -1299,14 +1315,14 @@ html:not([data-theme="light"]) .img-light {
 @media (min-width: 992px) {
   .db-grid-content {
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
-    gap: 40px !important;
-    padding: 40px !important;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 30px 30px 10px !important; /* Reduced bottom padding */
   }
   
   .ranking-card {
-    min-height: 480px !important;
-    padding: 40px 35px !important;
+    height: auto !important;
+    padding: 20px !important;
   }
 }
 
@@ -1315,8 +1331,8 @@ html:not([data-theme="light"]) .img-light {
   .db-grid-content, .db-row-scroll {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
-    padding: 10px 0 !important;
+    gap: 8px !important;
+    padding: 5px 0 !important;
     overflow-x: visible !important;
   }
 
@@ -1353,10 +1369,10 @@ html:not([data-theme="light"]) .img-light {
     width: 100% !important;
     flex-direction: row !important; 
     align-items: center !important;
-    padding: 20px 22px !important; /* Increased padding for more "Professional" breathing room */
-    gap: 24px !important;
-    min-height: 100px !important; /* Force a bit of height as in reference */
-    border-radius: 18px !important;
+    padding: 12px 16px !important; /* Compact ranking list */
+    gap: 16px !important;
+    min-height: 80px !important; 
+    border-radius: 14px !important;
     background: #ffffff !important;
     border: 1px solid rgba(0,0,0,0.03) !important;
     box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
@@ -1369,13 +1385,13 @@ html:not([data-theme="light"]) .img-light {
   }
 
   .card-header {
-    width: 45px !important; 
+    width: 35px !important; 
     flex-shrink: 0 !important;
     gap: 0 !important;
   }
   
   .card-rank {
-    font-size: 1.8rem !important; 
+    font-size: 1.5rem !important; 
     line-height: 1 !important;
     color: #111 !important;
     font-weight: 800 !important;
@@ -1383,13 +1399,21 @@ html:not([data-theme="light"]) .img-light {
   }
   [data-theme="dark"] .card-rank { color: #fff !important; }
 
+  .db-card-top {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 16px !important;
+    flex: 1 !important;
+  }
+
   .db-card-info {
     flex: 1 !important;
     text-align: center !important; 
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
-    padding: 0 10px !important;
+    padding: 0 !important;
   }
 
   .db-card-title {
