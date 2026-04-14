@@ -483,6 +483,30 @@ function openProjectModal(companyKey) {
   document.getElementById('db-hero-title').textContent = data.name;
   document.getElementById('db-hero-sub').textContent   = meta.heroSub;
 
+  // ── Hide/Show Categories based on Data availability ──
+  const navBtns = document.querySelectorAll('.db-nav-btn');
+  const folderChips = document.querySelectorAll('.db-folder-chip');
+  
+  const hasVids = !!(data.Videos && data.Videos.length > 0);
+  const hasReels = !!(data.Reels && data.Reels.length > 0);
+  const hasImg = !!(data.Images && data.Images.length > 0);
+
+  navBtns.forEach(btn => {
+    const tab = btn.getAttribute('data-tab');
+    if (tab === 'videos' && !hasVids) btn.style.display = 'none';
+    else if (tab === 'reels' && !hasReels) btn.style.display = 'none';
+    else if (tab === 'images' && !hasImg) btn.style.display = 'none';
+    else btn.style.display = 'flex';
+  });
+
+  folderChips.forEach(chip => {
+    const txt = chip.textContent.toLowerCase();
+    if (txt.includes('video') && !hasVids) chip.style.display = 'none';
+    else if (txt.includes('reel') && !hasReels) chip.style.display = 'none';
+    else if (txt.includes('image') && !hasImg) chip.style.display = 'none';
+    else chip.style.display = 'flex';
+  });
+
   // ── Render content ──
   renderDashboard(companyKey, 'all');
 
@@ -506,11 +530,30 @@ function closeProjectModal() {
   currentCompany = null;
 }
 
+function scrollToDbRow(className) {
+  const row = document.querySelector('.' + className);
+  const dbMain = document.getElementById('db-main');
+  if (row && dbMain) {
+    dbMain.scrollTo({
+      top: row.offsetTop - 20,
+      behavior: 'smooth'
+    });
+  }
+}
+
 function dbSwitchTab(tab, btn) {
   currentTab = tab;
   document.querySelectorAll('.db-nav-btn').forEach(b => b.classList.remove('active'));
   const targetBtn = btn || document.querySelector(`.db-nav-btn[data-tab="${tab.toLowerCase()}"]`);
   if (targetBtn) targetBtn.classList.add('active');
+
+  // Synchronize folder chips
+  document.querySelectorAll('.db-folder-chip').forEach(chip => {
+    chip.classList.remove('active');
+    if (chip.textContent.includes(tab.replace(/s$/, ''))) {
+      chip.classList.add('active');
+    }
+  });
   
   renderDashboard(currentCompany, tab);
   const dbMain = document.getElementById('db-main');
@@ -529,6 +572,8 @@ function renderDashboard(companyKey, tab) {
     if (data.Reels && data.Reels.length > 0) sections.push(buildRow('Reel Folder', data.Reels, 'Reels', 'folder-open', companyKey, true));
     if (data.Images && data.Images.length > 0) sections.push(buildRow('Image Folder', data.Images, 'Images', 'folder-open', companyKey, false, true));
     rows.innerHTML = sections.join('');
+    // Remove active state from chips on 'all' view
+    document.querySelectorAll('.db-folder-chip').forEach(chip => chip.classList.remove('active'));
   } else {
     // CATEGORY VIEW
     rows.classList.remove('db-grid-mode'); 
@@ -546,7 +591,6 @@ function renderDashboard(companyKey, tab) {
         <div class="db-category-wrapper">
           <div class="db-category-header">
             <span class="db-row-title"><i class="fa-solid fa-folder-open"></i> ${title}</span>
-            <span class="view-badge" onclick="dbSwitchTab('all', null)">Back to Overview</span>
           </div>
           <div class="db-grid-content">${cards}</div>
         </div>
@@ -563,11 +607,9 @@ function renderDashboard(companyKey, tab) {
 function buildRow(label, items, typeKey, icon, companyKey, isReel = false, isImage = false) {
   const brandIcon = 'fa-solid';
   const tabId = typeKey.toLowerCase();
-  const countHtml = `<span class="view-badge" onclick="dbSwitchTab('${typeKey}', null)">View All</span>`;
   const header = `
     <div class="db-row-header">
       <span class="db-row-title"><i class="${brandIcon} fa-${icon}"></i>${label}</span>
-      ${countHtml}
     </div>`;
 
   if (!items.length) {
@@ -579,7 +621,7 @@ function buildRow(label, items, typeKey, icon, companyKey, isReel = false, isIma
 
   const cards = items.map((item, idx) => buildCard(item, typeKey, companyKey, isReel, isImage, idx)).filter(c => !!c).join('');
   if (!cards) return '';
-  return `<div class="db-row">
+  return `<div class="db-row db-row-${typeKey.toLowerCase()}">
     ${header}
     <div class="db-row-scroll">${cards}</div>
   </div>`;
@@ -634,16 +676,10 @@ function buildCard(item, typeKey, companyKey, isReel, isImage, index = 0) {
   const rankNum = (index + 1).toString().padStart(2, '0');
 
   return `
-    <div class="db-card ranking-card ${typeClass}" ${clickAttr}>
-      <div class="db-card-top">
-        <div class="card-header">
-          <span class="card-rank">${rankNum}</span>
-          <div class="card-brand-accent"></div>
-        </div>
-        
-        <div class="db-card-info">
-          <div class="db-card-title">${item.title || 'Untitled Work'}</div>
-        </div>
+    <div class="db-card ranking-card ${typeClass} db-type-${typeKey.toLowerCase().replace(/s$/, '')}" ${clickAttr}>
+      <div class="db-card-header-group">
+        <span class="card-rank">${rankNum}</span>
+        <div class="db-card-title">${item.title || 'Untitled Work'}</div>
       </div>
 
       <div class="db-card-media-wrap">
