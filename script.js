@@ -309,6 +309,8 @@ const projectData = {
   pen: {
     name: 'Pen Studio Pvt Ltd',
     Videos: [
+      { title: "End Screen", year: "2024", embed: `<iframe src="https://www.youtube.com/embed/A6FwLd0D8Qc?autoplay=1&mute=1" allow="autoplay" allowfullscreen></iframe>` },
+      { title: "End Screen 2", year: "2024", embed: `<iframe src="https://www.youtube.com/embed/1YwLRispMU0?autoplay=1&mute=1" allow="autoplay" allowfullscreen></iframe>` },
       { title: "YouTube Interface for Mahabharat", year: "2024", embed: `<iframe src="https://www.youtube.com/embed/em2fO28oWYo?autoplay=1&mute=1" allow="autoplay" allowfullscreen></iframe>` },
       { title: "Uru Krodhi Movie Title", year: "2024", embed: `<iframe src="https://www.youtube.com/embed/L7WvsB0srHk?autoplay=1&mute=1" allow="autoplay" allowfullscreen></iframe>` },
       { title: "Train Ek Chase Movie Titles", year: "2024", embed: `<iframe src="https://www.youtube.com/embed/Q8_hFM2npKA?autoplay=1&mute=1" allow="autoplay" allowfullscreen></iframe>` },
@@ -374,6 +376,7 @@ const projectData = {
       { title: "10 Million Subscribers Milestone", year: "2024", embed: `<iframe src="https://www.youtube.com/embed/Cv6rXEo0Po8?autoplay=1&mute=1" allow="autoplay" allowfullscreen></iframe>` }
     ],
     Reels: [
+      { title: 'Pen Gujrati End Slate', year: '2024', embed: `<iframe src="https://www.youtube.com/embed/rvGLpVJ4Dks?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>` },
       { title: 'Navdurga Intro Day 5 Reel', year: '2024', embed: `<iframe src="https://www.youtube.com/embed/Z0iL6_WYq-A?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>` },
       { title: 'Upcoming Movies 2026 2027 Reel 01', year: '2024', embed: `<iframe src="https://www.youtube.com/embed/gGLY_AEA6oM?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>` },
       { title: 'Sirivennela End Slate Screen Reel', year: '2024', embed: `<iframe src="https://www.youtube.com/embed/KNPuU99zEaY?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>` },
@@ -673,7 +676,15 @@ function buildCard(item, typeKey, companyKey, isReel, isImage, index = 0) {
     ? `onclick="openLightbox('${encodeURIComponent(JSON.stringify(itemForLightbox))}')" `
     : '';
 
-  const rankNum = (index + 1).toString().padStart(2, '0');
+  const getAlphabet = (i) => {
+    let label = "";
+    while (i >= 0) {
+      label = String.fromCharCode((i % 26) + 65) + label;
+      i = Math.floor(i / 26) - 1;
+    }
+    return label + ".";
+  };
+  const rankNum = getAlphabet(index);
 
   return `
     <div class="db-card ranking-card ${typeClass} db-type-${typeKey.toLowerCase().replace(/s$/, '')}" ${clickAttr}>
